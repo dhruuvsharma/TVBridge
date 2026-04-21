@@ -1,0 +1,59 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+publish/
+dist/
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# VS
+.vs/
+*.rsuser
+*.csproj.user
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Ruff
+.ruff_cache/
+
+# Tools (downloaded binaries)
+tools/cloudflared/*.exe
+
+# Inno Setup output
+installer/output/
+
+# Logs
+logs/
+*.log
+
+# Secrets
+secrets/
+*.pfx
+appsettings.Production.json
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# IDE
+.idea/
+*.swp
+*.swo

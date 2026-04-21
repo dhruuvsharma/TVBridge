@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TVBridge Signal",
+  "description": "Canonical signal schema for TradingView alerts routed through TVBridge.",
+  "type": "object",
+  "required": ["alert_id", "strategy_id", "account_tag", "symbol", "action", "order_type", "timeframe", "timestamp", "secret"],
+  "properties": {
+    "alert_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this alert instance."
+    },
+    "strategy_id": {
+      "type": "string",
+      "description": "Identifier for the strategy that generated this signal."
+    },
+    "account_tag": {
+      "type": "string",
+      "description": "Tag to match against routing rules for account targeting."
+    },
+    "symbol": {
+      "type": "string",
+      "description": "Instrument symbol as sent by TradingView."
+    },
+    "action": {
+      "type": "string",
+      "enum": ["BUY", "SELL", "CLOSE", "MODIFY"],
+      "description": "Trading action to perform."
+    },
+    "order_type": {
+      "type": "string",
+      "enum": ["MARKET", "LIMIT", "STOP"],
+      "description": "Order type for the trade."
+    },
+    "entry_price": {
+      "type": ["number", "null"],
+      "description": "Entry price for LIMIT/STOP orders. Null for MARKET."
+    },
+    "stop_loss": {
+      "type": ["number", "null"],
+      "description": "Stop-loss price level."
+    },
+    "take_profit": {
+      "type": ["number", "null"],
+      "description": "Take-profit price level."
+    },
+    "lot_size": {
+      "type": ["number", "null"],
+      "description": "Position size in lots. Mutually exclusive with risk_percent."
+    },
+    "risk_percent": {
+      "type": ["number", "null"],
+      "description": "Risk as percentage of account balance. Mutually exclusive with lot_size."
+    },
+    "timeframe": {
+      "type": "string",
+      "description": "Chart timeframe (e.g., 1H, 4H, 1D)."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of signal generation."
+    },
+    "comment": {
+      "type": ["string", "null"],
+      "description": "Optional comment or note."
+    },
+    "secret": {
+      "type": "string",
+      "description": "Shared secret for webhook authentication."
+    }
+  },
+  "additionalProperties": false
+}

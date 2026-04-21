@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
+    <PackageReference Include="Serilog" Version="4.2.0" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TVBridge.Core\TVBridge.Core.csproj" />
+    <ProjectReference Include="..\TVBridge.Webhook\TVBridge.Webhook.csproj" />
+    <ProjectReference Include="..\TVBridge.Storage\TVBridge.Storage.csproj" />
+    <ProjectReference Include="..\TVBridge.Tunnel\TVBridge.Tunnel.csproj" />
+    <ProjectReference Include="..\TVBridge.Channels\TVBridge.Channels.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,66 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(dotnet build*)",
+      "Bash(dotnet test*)",
+      "Bash(dotnet run*)",
+      "Bash(dotnet format*)",
+      "Bash(dotnet restore*)",
+      "Bash(dotnet publish*)",
+      "Bash(git *)",
+      "Bash(python *)",
+      "Bash(ruff *)",
+      "Bash(pytest *)",
+      "Bash(mkdir *)",
+      "Bash(ls *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(del /s *)",
+      "Bash(format *)",
+      "Bash(git push --force*)",
+      "Edit(secrets/*)",
+      "Edit(*.pfx)",
+      "Edit(appsettings.Production.json)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "command": "bash .claude/hooks/block-destructive.sh"
+      },
+      {
+        "matcher": "Edit",
+        "command": "bash .claude/hooks/block-secrets.sh"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "command": "bash .claude/hooks/format-cs.sh"
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": "bash .claude/hooks/format-py.sh"
+      },
+      {
+        "matcher": "Edit|Write",
+        "command": "bash .claude/hooks/validate-xaml.sh"
+      }
+    ],
+    "SessionStart": [
+      {
+        "command": "bash .claude/hooks/session-start.sh"
+      }
+    ],
+    "Stop": [
+      {
+        "command": "bash .claude/hooks/stop-build-check.sh"
+      }
+    ]
+  }
+}

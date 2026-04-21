@@ -1,0 +1,27 @@
+[project]
+name = "tvbridge-mt5-sidecar"
+version = "0.1.0"
+description = "TVBridge MetaTrader 5 sidecar process"
+requires-python = ">=3.11"
+dependencies = [
+    "MetaTrader5>=5.0.45",
+    "pyzmq>=26.0.0",
+    "pydantic>=2.10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8.0",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "ANN", "B", "SIM"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

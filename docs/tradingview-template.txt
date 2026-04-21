@@ -1,0 +1,17 @@
+{
+  "alert_id": "{{timenow}}",
+  "strategy_id": "MY_STRATEGY",
+  "account_tag": "default",
+  "symbol": "{{ticker}}",
+  "action": "{{strategy.order.action}}",
+  "order_type": "MARKET",
+  "entry_price": {{strategy.order.price}},
+  "stop_loss": null,
+  "take_profit": null,
+  "lot_size": null,
+  "risk_percent": 1.0,
+  "timeframe": "{{interval}}",
+  "timestamp": "{{timenow}}",
+  "comment": "{{strategy.order.comment}}",
+  "secret": "YOUR_WEBHOOK_SECRET_HERE"
+}
