@@ -1,13 +1,12 @@
+using TVBridge.Core;
+
 namespace TVBridge.Channels.Abstractions;
 
-/// <summary>
-/// Contract for all output channels (MT5, Telegram, Discord, NinjaTrader, etc.).
-/// </summary>
 public interface IOutputChannel
 {
     string Name { get; }
+    string ChannelType { get; }
 
-    Task SendAsync(/* Signal signal, */ CancellationToken cancellationToken = default);
-
+    Task<ChannelResult> SendAsync(Signal signal, bool dryRun, CancellationToken cancellationToken = default);
     Task<bool> ValidateConfigAsync(CancellationToken cancellationToken = default);
 }
