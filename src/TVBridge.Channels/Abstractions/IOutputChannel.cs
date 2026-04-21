@@ -1,12 +1,2 @@
-using TVBridge.Core;
-
-namespace TVBridge.Channels.Abstractions;
-
-public interface IOutputChannel
-{
-    string Name { get; }
-    string ChannelType { get; }
-
-    Task<ChannelResult> SendAsync(Signal signal, bool dryRun, CancellationToken cancellationToken = default);
-    Task<bool> ValidateConfigAsync(CancellationToken cancellationToken = default);
-}
+// Interface moved to TVBridge.Core.IOutputChannel
+// This file is kept empty — channel implementations use TVBridge.Core directly
