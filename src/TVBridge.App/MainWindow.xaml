@@ -109,7 +109,13 @@
 
         <!-- Status Bar -->
         <Border Grid.Column="1" Grid.Row="1" Background="#F0F0F0" Padding="12,6">
-            <TextBlock Text="{Binding StatusText}" FontSize="12" Foreground="#666666" />
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right" Margin="12,0,0,0" FontSize="12" Foreground="#4488CC"
+                           Text="{Binding TunnelUrl}" ToolTip="Click to copy tunnel URL"
+                           Cursor="Hand" MouseLeftButtonDown="CopyTunnelUrl_Click"
+                           Visibility="{Binding TunnelUrl, Converter={StaticResource NullToCollapsed}}" />
+                <TextBlock Text="{Binding TunnelStatusText}" FontSize="12" Foreground="#666666" />
+            </DockPanel>
         </Border>
     </Grid>
 </Window>

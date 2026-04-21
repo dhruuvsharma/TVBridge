@@ -6,6 +6,7 @@ using Serilog;
 using TVBridge.Core;
 using TVBridge.Storage;
 using TVBridge.Storage.Repositories;
+using TVBridge.Tunnel;
 using TVBridge.Webhook;
 
 namespace TVBridge.App;
@@ -14,6 +15,7 @@ public partial class App : Application
 {
     private IHost? _host;
     private WebhookListener? _webhookListener;
+    private CloudflaredManager? _tunnelManager;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -35,6 +37,12 @@ public partial class App : Application
                 retainedFileCountLimit: 30,
                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
             .CreateLogger();
+
+        var tunnelConfig = new TunnelConfig
+        {
+            LocalPort = 5555,
+            CloudflaredPath = Path.Combine(appDataPath, "cloudflared", "cloudflared.exe")
+        };
 
         _host = Host.CreateDefaultBuilder()
             .UseSerilog()
@@ -65,10 +73,15 @@ public partial class App : Application
                         settings.GetAsync("webhook_secret").GetAwaiter().GetResult());
                 });
                 services.AddSingleton(sp => new WebhookListener(
-                    5555,
+                    tunnelConfig.LocalPort,
                     sp.GetRequiredService<SignalValidator>(),
                     sp.GetRequiredService<WebhookSecretValidator>(),
                     sp.GetRequiredService<Microsoft.Extensions.Logging.ILogger<WebhookListener>>()));
+
+                // Tunnel
+                services.AddSingleton(tunnelConfig);
+                services.AddSingleton<CloudflaredDownloader>();
+                services.AddSingleton<CloudflaredManager>();
 
                 // UI
                 services.AddSingleton<ViewModels.MainViewModel>();
@@ -91,19 +104,32 @@ public partial class App : Application
             var signalRepo = _host.Services.GetRequiredService<SignalRepository>();
             var id = await signalRepo.InsertAsync(signal, ct);
             var rules = await ruleRepo.GetAllEnabledAsync(ct);
-            // TODO: read global dry-run from settings
             await pipeline.ProcessAsync(signal with { Id = id }, rules, globalDryRun: false, ct);
             await signalRepo.MarkProcessedAsync(id, ct);
         });
         await _webhookListener.StartAsync();
 
+        // Show window
+        var mainViewModel = _host.Services.GetRequiredService<ViewModels.MainViewModel>();
         var mainWindow = _host.Services.GetRequiredService<MainWindow>();
-        mainWindow.DataContext = _host.Services.GetRequiredService<ViewModels.MainViewModel>();
+        mainWindow.DataContext = mainViewModel;
         mainWindow.Show();
+
+        // Start tunnel (after UI is visible so user sees status updates)
+        _tunnelManager = _host.Services.GetRequiredService<CloudflaredManager>();
+        _tunnelManager.StatusChanged += (_, status) =>
+        {
+            mainWindow.Dispatcher.Invoke(() =>
+                mainViewModel.UpdateTunnelStatus(status, _tunnelManager.TunnelUrl));
+        };
+        _ = _tunnelManager.StartAsync();
     }
 
     protected override async void OnExit(ExitEventArgs e)
     {
+        if (_tunnelManager is not null)
+            await _tunnelManager.DisposeAsync();
+
         if (_webhookListener is not null)
             await _webhookListener.DisposeAsync();
 

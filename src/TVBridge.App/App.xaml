@@ -1,6 +1,9 @@
 <Application x:Class="TVBridge.App.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:TVBridge.App.Converters"
 >
-    <Application.Resources />
+    <Application.Resources>
+        <converters:NullToCollapsedConverter x:Key="NullToCollapsed" />
+    </Application.Resources>
 </Application>
