@@ -2,8 +2,11 @@
   "permissions": {
     "allow": [
       "Read",
+      "Write",
+      "Edit",
       "Grep",
       "Glob",
+      "Agent",
       "Bash(dotnet build*)",
       "Bash(dotnet test*)",
       "Bash(dotnet run*)",
@@ -15,7 +18,11 @@
       "Bash(ruff *)",
       "Bash(pytest *)",
       "Bash(mkdir *)",
-      "Bash(ls *)"
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(cd *)",
+      "Bash(cat *)",
+      "Bash(gh *)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -36,26 +43,6 @@
       {
         "matcher": "Edit",
         "hooks": [{"type": "command", "command": "bash .claude/hooks/block-secrets.sh"}]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "Edit|Write",
-        "hooks": [{"type": "command", "command": "bash .claude/hooks/format-cs.sh"}]
-      },
-      {
-        "matcher": "Edit|Write",
-        "hooks": [{"type": "command", "command": "bash .claude/hooks/format-py.sh"}]
-      },
-      {
-        "matcher": "Edit|Write",
-        "hooks": [{"type": "command", "command": "bash .claude/hooks/validate-xaml.sh"}]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "",
-        "hooks": [{"type": "command", "command": "bash .claude/hooks/stop-build-check.sh"}]
       }
     ]
   }

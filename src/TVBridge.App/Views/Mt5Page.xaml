@@ -1,0 +1,92 @@
+<UserControl x:Class="TVBridge.App.Views.Mt5Page"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="OnLoaded">
+    <Grid Margin="24" Background="{DynamicResource AppBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="MetaTrader 5" Style="{DynamicResource PageTitle}" Margin="0,0,0,4" />
+            <TextBlock Text="Python sidecar bridge for MT5 order execution" Style="{DynamicResource PageSubtitle}" />
+        </StackPanel>
+
+        <!-- Status + Config -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Sidecar Status -->
+            <Border Grid.Column="0" Style="{DynamicResource NeonCard}" Margin="0,0,8,0">
+                <StackPanel>
+                    <TextBlock Text="Sidecar Status" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <Ellipse Width="10" Height="10" Margin="0,0,8,0">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Setter Property="Fill" Value="{DynamicResource NeonRed}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SidecarStatus}" Value="Running">
+                                            <Setter Property="Fill" Value="{DynamicResource NeonGreen}" />
+                                            <Setter Property="Effect" Value="{DynamicResource NeonGlowGreen}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                        </Ellipse>
+                        <TextBlock Text="{Binding SidecarStatus}" Foreground="{DynamicResource TextPrimary}"
+                                   FontSize="16" FontWeight="SemiBold" />
+                    </StackPanel>
+
+                    <CheckBox Content="Channel Enabled" IsChecked="{Binding IsEnabled}"
+                              Style="{DynamicResource NeonCheckBox}" Margin="0,0,0,12" />
+                    <Button Content="Toggle Enable" Style="{DynamicResource NeonButton}"
+                            HorizontalAlignment="Left" Command="{Binding ToggleEnabledCommand}" />
+                </StackPanel>
+            </Border>
+
+            <!-- Actions -->
+            <Border Grid.Column="1" Style="{DynamicResource NeonCard}" Margin="8,0,0,0">
+                <StackPanel>
+                    <TextBlock Text="Test Connection" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12" />
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button Content="Validate Config" Style="{DynamicResource NeonButton}"
+                                Margin="0,0,8,0" Command="{Binding ValidateCommand}" />
+                        <Button Content="Test Send (Dry Run)" Style="{DynamicResource NeonButton}"
+                                Command="{Binding TestSendCommand}" />
+                    </StackPanel>
+                    <TextBlock Text="{Binding TestResult}" Foreground="{DynamicResource NeonCyan}"
+                               FontSize="12" TextWrapping="Wrap" />
+                    <TextBlock Text="{Binding StatusMessage}" Foreground="{DynamicResource TextSecondary}"
+                               FontSize="11" Margin="0,4,0,0" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Info -->
+        <Border Grid.Row="2" Style="{DynamicResource NeonCard}">
+            <StackPanel>
+                <TextBlock Text="Setup Guide" Style="{DynamicResource SectionTitle}" Margin="0,0,0,8" />
+                <TextBlock Foreground="{DynamicResource TextSecondary}" FontSize="13" TextWrapping="Wrap" LineHeight="22">
+                    <Run Text="1." FontWeight="Bold" Foreground="{DynamicResource NeonCyan}" />
+                    <Run Text=" Install MetaTrader 5 and log in to a demo or live account" />
+                    <LineBreak />
+                    <Run Text="2." FontWeight="Bold" Foreground="{DynamicResource NeonCyan}" />
+                    <Run Text=" The Python sidecar starts automatically when TVBridge launches" />
+                    <LineBreak />
+                    <Run Text="3." FontWeight="Bold" Foreground="{DynamicResource NeonCyan}" />
+                    <Run Text=" Create routing rules in the Rules tab to send signals to MT5 (Channel ID: 0)" />
+                    <LineBreak />
+                    <Run Text="4." FontWeight="Bold" Foreground="{DynamicResource NeonCyan}" />
+                    <Run Text=" Supported actions: Buy, Sell, Close (FIFO), Modify (SL/TP)" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

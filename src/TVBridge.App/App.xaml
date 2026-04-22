@@ -4,6 +4,11 @@
              xmlns:converters="clr-namespace:TVBridge.App.Converters"
 >
     <Application.Resources>
-        <converters:NullToCollapsedConverter x:Key="NullToCollapsed" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/NeonDark.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:NullToCollapsedConverter x:Key="NullToCollapsed" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

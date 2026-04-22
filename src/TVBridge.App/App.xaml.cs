@@ -3,6 +3,7 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using TVBridge.App.Services;
 using TVBridge.Core;
 using TVBridge.Storage;
 using TVBridge.Storage.Repositories;
@@ -124,11 +125,16 @@ public partial class App : Application
                 // Update checker
                 services.AddHttpClient<UpdateChecker>();
 
+                // Services
+                services.AddSingleton<ThemeService>();
+
                 // UI ViewModels
                 services.AddSingleton<ViewModels.DashboardViewModel>();
-                services.AddSingleton<ViewModels.SignalsViewModel>();
+                services.AddSingleton<ViewModels.Mt5ViewModel>();
+                services.AddSingleton<ViewModels.TelegramViewModel>();
+                services.AddSingleton<ViewModels.DiscordViewModel>();
+                services.AddSingleton<ViewModels.NinjaTraderViewModel>();
                 services.AddSingleton<ViewModels.RulesViewModel>();
-                services.AddSingleton<ViewModels.ChannelsViewModel>();
                 services.AddSingleton<ViewModels.SettingsViewModel>();
                 services.AddSingleton<ViewModels.MainViewModel>();
                 services.AddSingleton<MainWindow>();
@@ -160,6 +166,10 @@ public partial class App : Application
             await signalRepo.MarkProcessedAsync(id, ct);
         });
         await _webhookListener.StartAsync();
+
+        // Apply default theme
+        var themeService = _host.Services.GetRequiredService<ThemeService>();
+        themeService.ApplyTheme(dark: true);
 
         // Show window
         var mainViewModel = _host.Services.GetRequiredService<ViewModels.MainViewModel>();

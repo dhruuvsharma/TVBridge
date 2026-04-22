@@ -1,0 +1,108 @@
+<UserControl x:Class="TVBridge.App.Views.TradingViewPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Loaded="OnLoaded">
+    <Grid Margin="24" Background="{DynamicResource AppBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="TradingView" Style="{DynamicResource PageTitle}" Margin="0,0,0,4" />
+            <TextBlock Text="Webhook configuration, alert template, and signal log" Style="{DynamicResource PageSubtitle}" />
+        </StackPanel>
+
+        <!-- Webhook Config + Template (side by side) -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Webhook Config -->
+            <Border Grid.Column="0" Style="{DynamicResource NeonCard}" Margin="0,0,8,0">
+                <StackPanel>
+                    <TextBlock Text="Webhook Settings" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12" />
+
+                    <TextBlock Text="Secret" Style="{DynamicResource FieldLabel}" />
+                    <DockPanel Margin="0,0,0,10">
+                        <Button DockPanel.Dock="Right" Content="Generate" Style="{DynamicResource NeonButton}"
+                                Margin="8,0,0,0" Command="{Binding GenerateSecretCommand}" />
+                        <TextBox Text="{Binding WebhookSecret, UpdateSourceTrigger=PropertyChanged}"
+                                 Style="{DynamicResource NeonTextBox}" />
+                    </DockPanel>
+
+                    <TextBlock Text="Port" Style="{DynamicResource FieldLabel}" />
+                    <TextBox Text="{Binding WebhookPort, UpdateSourceTrigger=PropertyChanged}"
+                             Style="{DynamicResource NeonTextBox}" Width="120" HorizontalAlignment="Left"
+                             Margin="0,0,0,10" />
+
+                    <DockPanel>
+                        <Button Content="Save" Style="{DynamicResource NeonButtonPrimary}"
+                                Command="{Binding SaveWebhookCommand}" />
+                        <TextBlock Text="{Binding StatusMessage}" Foreground="{DynamicResource NeonGreen}"
+                                   VerticalAlignment="Center" Margin="12,0,0,0" FontSize="12" />
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- TV Template -->
+            <Border Grid.Column="1" Style="{DynamicResource NeonCard}" Margin="8,0,0,0">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Alert Template" Style="{DynamicResource SectionTitle}" Margin="0,0,0,8" />
+                    <TextBlock DockPanel.Dock="Top" Text="Copy this JSON into TradingView alert message:"
+                               Style="{DynamicResource FieldLabel}" Margin="0,0,0,8" />
+                    <Button DockPanel.Dock="Bottom" Content="Regenerate" Style="{DynamicResource NeonButton}"
+                            HorizontalAlignment="Left" Margin="0,8,0,0"
+                            Command="{Binding GenerateTvTemplateCommand}" />
+                    <TextBox Text="{Binding TvTemplate, Mode=OneWay}" IsReadOnly="True"
+                             FontFamily="Consolas" FontSize="11"
+                             Background="{DynamicResource SurfaceBrush}"
+                             Foreground="{DynamicResource NeonCyan}"
+                             BorderBrush="{DynamicResource BorderBrush}"
+                             TextWrapping="Wrap" AcceptsReturn="True"
+                             VerticalScrollBarVisibility="Auto" Padding="8" />
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Signal Log -->
+        <DockPanel Grid.Row="2">
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+                <Button DockPanel.Dock="Right" Content="Replay (Dry Run)" Style="{DynamicResource NeonButton}"
+                        Margin="8,0,0,0" Command="{Binding ReplayCommand}" />
+                <Button DockPanel.Dock="Right" Content="Refresh" Style="{DynamicResource NeonButton}"
+                        Command="{Binding LoadSignalsCommand}" />
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{DynamicResource NeonTextBox}" Margin="0,0,8,0" />
+            </DockPanel>
+
+            <DataGrid ItemsSource="{Binding Signals}"
+                      SelectedItem="{Binding SelectedSignal}"
+                      Style="{DynamicResource NeonDataGrid}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Time" Binding="{Binding ReceivedAt, StringFormat=HH:mm:ss}" Width="70" />
+                    <DataGridTextColumn Header="Alert" Binding="{Binding AlertId}" Width="90" />
+                    <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="80" />
+                    <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="60" />
+                    <DataGridTextColumn Header="Type" Binding="{Binding OrderType}" Width="60" />
+                    <DataGridTextColumn Header="Lot" Binding="{Binding LotSize, StringFormat=F2}" Width="50" />
+                    <DataGridTextColumn Header="Entry" Binding="{Binding EntryPrice, StringFormat=F5}" Width="75" />
+                    <DataGridTextColumn Header="SL" Binding="{Binding StopLoss, StringFormat=F5}" Width="75" />
+                    <DataGridTextColumn Header="TP" Binding="{Binding TakeProfit, StringFormat=F5}" Width="75" />
+                    <DataGridTextColumn Header="Strategy" Binding="{Binding StrategyId}" Width="*" />
+                    <DataGridCheckBoxColumn Header="OK" Binding="{Binding Processed}" Width="35" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <TextBlock Grid.Row="3" Margin="0,6,0,0" FontSize="11" Foreground="{DynamicResource TextMuted}">
+            <Run Text="{Binding Signals.Count, Mode=OneWay}" />
+            <Run Text=" signals" />
+        </TextBlock>
+    </Grid>
+</UserControl>

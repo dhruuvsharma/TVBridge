@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Loaded="OnLoaded">
-    <Grid Margin="24">
+    <Grid Margin="24" Background="{DynamicResource AppBackground}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -10,61 +10,45 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,20">
-            <TextBlock Text="Settings" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,8" />
-            <TextBlock Text="Global configuration and security settings" Foreground="#888888" FontSize="14" />
+            <TextBlock Text="Settings" Style="{DynamicResource PageTitle}" Margin="0,0,0,4" />
+            <TextBlock Text="Global configuration" Style="{DynamicResource PageSubtitle}" />
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <StackPanel MaxWidth="600" HorizontalAlignment="Left">
-                <!-- Webhook Section -->
-                <TextBlock Text="Webhook" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" />
+            <StackPanel MaxWidth="500" HorizontalAlignment="Left">
 
-                <TextBlock Text="Webhook Secret" FontSize="12" Foreground="#666666" Margin="0,0,0,4" />
-                <DockPanel Margin="0,0,0,12">
-                    <Button DockPanel.Dock="Right" Content="Generate" Padding="8,6" Margin="8,0,0,0"
-                            Command="{Binding GenerateSecretCommand}" />
-                    <TextBox Text="{Binding WebhookSecret, UpdateSourceTrigger=PropertyChanged}" Padding="6" />
-                </DockPanel>
+                <!-- Trading -->
+                <TextBlock Text="Trading" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource NeonCard}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <CheckBox Content="Global Dry-Run Mode (no real orders)" IsChecked="{Binding GlobalDryRun}"
+                                  Style="{DynamicResource NeonCheckBox}" FontSize="14" />
+                    </StackPanel>
+                </Border>
 
-                <TextBlock Text="Webhook Port" FontSize="12" Foreground="#666666" Margin="0,0,0,4" />
-                <TextBox Text="{Binding WebhookPort, UpdateSourceTrigger=PropertyChanged}" Padding="6" Margin="0,0,0,16" Width="120" HorizontalAlignment="Left" />
-
-                <!-- Trading Section -->
-                <TextBlock Text="Trading" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,12" />
-
-                <CheckBox Content="Global Dry-Run Mode (no real orders)" IsChecked="{Binding GlobalDryRun}"
-                          Margin="0,0,0,16" FontSize="14" />
-
-                <!-- Logging Section -->
-                <TextBlock Text="Logging" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,12" />
-
-                <TextBlock Text="Log Level" FontSize="12" Foreground="#666666" Margin="0,0,0,4" />
-                <ComboBox SelectedItem="{Binding LogLevel}" Padding="6" Margin="0,0,0,16" Width="180" HorizontalAlignment="Left">
-                    <ComboBoxItem Content="Verbose" />
-                    <ComboBoxItem Content="Debug" />
-                    <ComboBoxItem Content="Information" />
-                    <ComboBoxItem Content="Warning" />
-                    <ComboBoxItem Content="Error" />
-                </ComboBox>
+                <!-- Logging -->
+                <TextBlock Text="Logging" Style="{DynamicResource SectionTitle}" Margin="0,0,0,12" />
+                <Border Style="{DynamicResource NeonCard}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="Log Level" Style="{DynamicResource FieldLabel}" />
+                        <ComboBox SelectedItem="{Binding LogLevel}" Style="{DynamicResource NeonComboBox}"
+                                  Width="180" HorizontalAlignment="Left">
+                            <ComboBoxItem Content="Verbose" />
+                            <ComboBoxItem Content="Debug" />
+                            <ComboBoxItem Content="Information" />
+                            <ComboBoxItem Content="Warning" />
+                            <ComboBoxItem Content="Error" />
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
 
                 <!-- Save -->
-                <Button Content="Save Settings" Padding="16,10" FontWeight="SemiBold"
-                        Background="#2D2D44" Foreground="White" BorderThickness="0"
-                        HorizontalAlignment="Left" Margin="0,8,0,12"
-                        Command="{Binding SaveCommand}" />
-
-                <TextBlock Text="{Binding StatusMessage}" Foreground="#4488CC" FontSize="12" Margin="0,0,0,24" />
-
-                <!-- TradingView Template -->
-                <TextBlock Text="TradingView Alert Template" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,8" />
-                <TextBlock Text="Copy this JSON into your TradingView alert message field:" Foreground="#888888" FontSize="12" Margin="0,0,0,8" />
-                <Button Content="Regenerate Template" Padding="8,6" Margin="0,0,0,8"
-                        HorizontalAlignment="Left" Command="{Binding GenerateTvTemplateCommand}" />
-                <TextBox Text="{Binding TvTemplate, Mode=OneWay}" IsReadOnly="True"
-                         FontFamily="Consolas" FontSize="12" Padding="12"
-                         Background="#F5F5F5" BorderBrush="#DDDDDD"
-                         TextWrapping="Wrap" AcceptsReturn="True"
-                         VerticalScrollBarVisibility="Auto" MaxHeight="300" />
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Save Settings" Style="{DynamicResource NeonButtonPrimary}"
+                            Command="{Binding SaveCommand}" />
+                    <TextBlock Text="{Binding StatusMessage}" Foreground="{DynamicResource NeonGreen}"
+                               VerticalAlignment="Center" Margin="12,0,0,0" FontSize="12" />
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>
