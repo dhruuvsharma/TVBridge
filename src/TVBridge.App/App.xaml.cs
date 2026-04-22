@@ -6,6 +6,7 @@ using Serilog;
 using TVBridge.Core;
 using TVBridge.Storage;
 using TVBridge.Storage.Repositories;
+using TVBridge.Channels.Mt5;
 using TVBridge.Tunnel;
 using TVBridge.Webhook;
 
@@ -16,6 +17,7 @@ public partial class App : Application
     private IHost? _host;
     private WebhookListener? _webhookListener;
     private CloudflaredManager? _tunnelManager;
+    private Mt5SidecarManager? _mt5Manager;
 
     protected override async void OnStartup(StartupEventArgs e)
     {
@@ -83,6 +85,19 @@ public partial class App : Application
                 services.AddSingleton<CloudflaredDownloader>();
                 services.AddSingleton<CloudflaredManager>();
 
+                // MT5 Sidecar
+                var mt5Config = new Mt5Config
+                {
+                    SidecarPath = Path.Combine(AppContext.BaseDirectory, "sidecar", "mt5_bridge", "main.py")
+                };
+                services.AddSingleton(mt5Config);
+                services.AddSingleton<Mt5SidecarManager>();
+                services.AddSingleton<IMt5Client>(sp =>
+                    new Mt5ZmqClient(mt5Config, sp.GetRequiredService<Microsoft.Extensions.Logging.ILogger<Mt5ZmqClient>>()));
+                services.AddSingleton<Mt5Channel>();
+                services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<Mt5Channel>());
+                services.AddSingleton<Mt5AccountService>();
+
                 // UI
                 services.AddSingleton<ViewModels.MainViewModel>();
                 services.AddSingleton<MainWindow>();
@@ -115,6 +130,9 @@ public partial class App : Application
         mainWindow.DataContext = mainViewModel;
         mainWindow.Show();
 
+        // Store MT5 manager reference for cleanup
+        _mt5Manager = _host.Services.GetRequiredService<Mt5SidecarManager>();
+
         // Start tunnel (after UI is visible so user sees status updates)
         _tunnelManager = _host.Services.GetRequiredService<CloudflaredManager>();
         _tunnelManager.StatusChanged += (_, status) =>
@@ -127,6 +145,9 @@ public partial class App : Application
 
     protected override async void OnExit(ExitEventArgs e)
     {
+        if (_mt5Manager is not null)
+            await _mt5Manager.DisposeAsync();
+
         if (_tunnelManager is not null)
             await _tunnelManager.DisposeAsync();
 

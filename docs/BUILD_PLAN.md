@@ -3,7 +3,7 @@
 > Each phase ends with: green tests, updated CLAUDE.md (via `docs-scribe`), and a git commit.
 > Do not start a phase without explicit approval.
 
-## Current Phase: 1 — Foundation
+## Current Phase: 4 — Python MT5 Sidecar (Two-Way)
 
 ---
 
@@ -47,17 +47,17 @@
 
 ---
 
-## Phase 4 — Python MT5 Sidecar (Two-Way)
+## Phase 4 — Python MT5 Sidecar (Two-Way) ✅
 
 **Goal:** Full two-way communication with MetaTrader 5 via Python sidecar.
 
-- [ ] Python project with `MetaTrader5`, `pyzmq`, `pydantic`
-- [ ] ZeroMQ REQ/REP for commands, PUB/SUB for account state stream
-- [ ] Commands: connect, disconnect, place_order, modify, close, get_positions, get_balance, get_history
-- [ ] C# `Mt5Channel` implementing `IOutputChannel`
-- [ ] `Mt5AccountService` for pulling positions/balance/history into UI
-- [ ] Sidecar process lifecycle managed by C# app
-- [ ] Integration tests (skip if `MT5_DEMO_LOGIN` env var not set)
+- [x] Python project with `MetaTrader5`, `pyzmq`, `pydantic`
+- [x] ZeroMQ REQ/REP for commands, PUB/SUB for account state stream
+- [x] Commands: connect, disconnect, place_order, modify, close, get_positions, get_balance, get_history
+- [x] C# `Mt5Channel` implementing `IOutputChannel`
+- [x] `Mt5AccountService` for pulling positions/balance/history into UI
+- [x] Sidecar process lifecycle managed by C# app
+- [x] Integration tests (skip if `MT5_DEMO_LOGIN` env var not set)
 
 ---
 

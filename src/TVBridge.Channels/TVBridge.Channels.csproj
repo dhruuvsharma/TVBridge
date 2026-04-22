@@ -16,4 +16,8 @@
     <ProjectReference Include="..\TVBridge.Core\TVBridge.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="TVBridge.Channels.Tests" />
+  </ItemGroup>
+
 </Project>

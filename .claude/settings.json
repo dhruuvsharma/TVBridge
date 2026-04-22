@@ -52,11 +52,6 @@
         "command": "bash .claude/hooks/validate-xaml.sh"
       }
     ],
-    "SessionStart": [
-      {
-        "command": "bash .claude/hooks/session-start.sh"
-      }
-    ],
     "Stop": [
       {
         "command": "bash .claude/hooks/stop-build-check.sh"
