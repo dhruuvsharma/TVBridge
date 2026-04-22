@@ -1,10 +1,12 @@
 <Window x:Class="TVBridge.App.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:views="clr-namespace:TVBridge.App.Views"
+        xmlns:views="clr-namespace:TVBridge.App.Views" 
+        xmlns:converters="clr-namespace:TVBridge.App.Converters"
         Title="TVBridge" Height="650" Width="1000"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
+        <converters:NullToCollapsedConverter x:Key="NullToCollapsed" />
         <Style x:Key="NavButton" TargetType="Button">
             <Setter Property="Background" Value="Transparent" />
             <Setter Property="Foreground" Value="#CCCCCC" />

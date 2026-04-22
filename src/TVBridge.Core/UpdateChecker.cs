@@ -13,7 +13,7 @@ public sealed class UpdateChecker
     private readonly HttpClient _httpClient;
     private readonly ILogger<UpdateChecker> _logger;
 
-    public static string CurrentVersion => "0.1.0";
+    public static string CurrentVersion => "1.0.0";
 
     public UpdateChecker(HttpClient httpClient, ILogger<UpdateChecker> logger)
     {
@@ -27,8 +27,8 @@ public sealed class UpdateChecker
     /// Returns the new version string if available, null if up to date or check fails.
     /// </summary>
     public async Task<UpdateInfo?> CheckAsync(
-        string owner = "user",
-        string repo = "tvbridge",
+        string owner = "dhruuvsharma",
+        string repo = "TVBridge",
         CancellationToken cancellationToken = default)
     {
         try

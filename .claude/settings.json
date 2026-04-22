@@ -31,30 +31,31 @@
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "command": "bash .claude/hooks/block-destructive.sh"
+        "hooks": [{"type": "command", "command": "bash .claude/hooks/block-destructive.sh"}]
       },
       {
         "matcher": "Edit",
-        "command": "bash .claude/hooks/block-secrets.sh"
+        "hooks": [{"type": "command", "command": "bash .claude/hooks/block-secrets.sh"}]
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/format-cs.sh"
+        "hooks": [{"type": "command", "command": "bash .claude/hooks/format-cs.sh"}]
       },
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/format-py.sh"
+        "hooks": [{"type": "command", "command": "bash .claude/hooks/format-py.sh"}]
       },
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/validate-xaml.sh"
+        "hooks": [{"type": "command", "command": "bash .claude/hooks/validate-xaml.sh"}]
       }
     ],
     "Stop": [
       {
-        "command": "bash .claude/hooks/stop-build-check.sh"
+        "matcher": "",
+        "hooks": [{"type": "command", "command": "bash .claude/hooks/stop-build-check.sh"}]
       }
     ]
   }
