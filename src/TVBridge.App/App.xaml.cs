@@ -6,7 +6,9 @@ using Serilog;
 using TVBridge.Core;
 using TVBridge.Storage;
 using TVBridge.Storage.Repositories;
+using TVBridge.Channels.Discord;
 using TVBridge.Channels.Mt5;
+using TVBridge.Channels.Telegram;
 using TVBridge.Tunnel;
 using TVBridge.Webhook;
 
@@ -97,6 +99,18 @@ public partial class App : Application
                 services.AddSingleton<Mt5Channel>();
                 services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<Mt5Channel>());
                 services.AddSingleton<Mt5AccountService>();
+
+                // Telegram
+                services.AddSingleton<TelegramConfig>();
+                services.AddHttpClient("Telegram");
+                services.AddSingleton<TelegramChannel>();
+                services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<TelegramChannel>());
+
+                // Discord
+                services.AddSingleton<DiscordConfig>();
+                services.AddHttpClient("Discord");
+                services.AddSingleton<DiscordChannel>();
+                services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<DiscordChannel>());
 
                 // UI
                 services.AddSingleton<ViewModels.MainViewModel>();

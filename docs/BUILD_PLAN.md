@@ -3,7 +3,7 @@
 > Each phase ends with: green tests, updated CLAUDE.md (via `docs-scribe`), and a git commit.
 > Do not start a phase without explicit approval.
 
-## Current Phase: 4 — Python MT5 Sidecar (Two-Way)
+## Current Phase: 5 — Telegram + Discord Channels
 
 ---
 
@@ -61,14 +61,14 @@
 
 ---
 
-## Phase 5 — Telegram + Discord Channels
+## Phase 5 — Telegram + Discord Channels ✅
 
 **Goal:** Notification channels for Telegram and Discord.
 
-- [ ] Telegram: bot token + chat ID config, formatted message templates
-- [ ] Discord: webhook URL config, embed formatting
-- [ ] Per-channel message templates editable in UI
-- [ ] Tests with mocked HTTP
+- [x] Telegram: bot token + chat ID config, formatted message templates
+- [x] Discord: webhook URL config, embed formatting
+- [x] Per-channel message templates editable in UI
+- [x] Tests with mocked HTTP
 
 ---
 
