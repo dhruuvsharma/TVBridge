@@ -3,7 +3,7 @@
 > Each phase ends with: green tests, updated CLAUDE.md (via `docs-scribe`), and a git commit.
 > Do not start a phase without explicit approval.
 
-## Current Phase: 7 — UI Completion
+## Current Phase: 8 — Packaging
 
 ---
 
@@ -96,14 +96,14 @@
 
 ---
 
-## Phase 8 — Packaging
+## Phase 8 — Packaging ✅
 
 **Goal:** Distributable Windows installer.
 
-- [ ] `release-build` skill end-to-end
-- [ ] Inno Setup installer with: app, Python embeddable, sidecar, cloudflared.exe
-- [ ] Code-signing placeholder (TODO: real cert is the one paid item)
-- [ ] SmartScreen warning documentation in README
+- [x] `release-build` skill end-to-end
+- [x] Inno Setup installer with: app, Python embeddable, sidecar, cloudflared.exe
+- [x] Code-signing placeholder (TODO: real cert is the one paid item)
+- [x] SmartScreen warning documentation in README
 
 ---
 
