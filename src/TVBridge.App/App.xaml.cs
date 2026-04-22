@@ -8,6 +8,7 @@ using TVBridge.Storage;
 using TVBridge.Storage.Repositories;
 using TVBridge.Channels.Discord;
 using TVBridge.Channels.Mt5;
+using TVBridge.Channels.NinjaTrader;
 using TVBridge.Channels.Telegram;
 using TVBridge.Tunnel;
 using TVBridge.Webhook;
@@ -111,6 +112,14 @@ public partial class App : Application
                 services.AddHttpClient("Discord");
                 services.AddSingleton<DiscordChannel>();
                 services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<DiscordChannel>());
+
+                // NinjaTrader
+                var ntConfig = new NinjaTraderConfig();
+                services.AddSingleton(ntConfig);
+                services.AddSingleton<IAtiClient>(sp =>
+                    new NtAtiClient(ntConfig, sp.GetRequiredService<Microsoft.Extensions.Logging.ILogger<NtAtiClient>>()));
+                services.AddSingleton<NinjaTraderChannel>();
+                services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<NinjaTraderChannel>());
 
                 // UI
                 services.AddSingleton<ViewModels.MainViewModel>();

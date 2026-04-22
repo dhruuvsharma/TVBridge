@@ -3,7 +3,7 @@
 > Each phase ends with: green tests, updated CLAUDE.md (via `docs-scribe`), and a git commit.
 > Do not start a phase without explicit approval.
 
-## Current Phase: 5 — Telegram + Discord Channels
+## Current Phase: 6 — NinjaTrader Channel
 
 ---
 
@@ -72,14 +72,14 @@
 
 ---
 
-## Phase 6 — NinjaTrader Channel
+## Phase 6 — NinjaTrader Channel ✅
 
 **Goal:** Order routing to NinjaTrader 8 via ATI.
 
-- [ ] NT8 ATI TCP socket client
-- [ ] Symbol mapping (TradingView → NT8 instrument names)
-- [ ] Order routing through ATI
-- [ ] Tests with mocked socket
+- [x] NT8 ATI TCP socket client
+- [x] Symbol mapping (TradingView → NT8 instrument names)
+- [x] Order routing through ATI
+- [x] Tests with mocked socket
 
 ---
 
