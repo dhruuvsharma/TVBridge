@@ -70,35 +70,35 @@
                         <DataTrigger Binding="{Binding SelectedPage}" Value="Dashboard">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <views:DashboardPage />
+                                    <views:DashboardPage DataContext="{Binding Dashboard}" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SelectedPage}" Value="Signals">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <views:SignalsPage />
+                                    <views:SignalsPage DataContext="{Binding Signals}" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SelectedPage}" Value="Rules">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <views:RulesPage />
+                                    <views:RulesPage DataContext="{Binding Rules}" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SelectedPage}" Value="Channels">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <views:ChannelsPage />
+                                    <views:ChannelsPage DataContext="{Binding Channels}" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SelectedPage}" Value="Settings">
                             <Setter Property="Content">
                                 <Setter.Value>
-                                    <views:SettingsPage />
+                                    <views:SettingsPage DataContext="{Binding Settings}" />
                                 </Setter.Value>
                             </Setter>
                         </DataTrigger>

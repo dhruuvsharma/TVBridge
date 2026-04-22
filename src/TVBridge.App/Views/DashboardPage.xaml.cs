@@ -8,4 +8,10 @@ public partial class DashboardPage : UserControl
     {
         InitializeComponent();
     }
+
+    private async void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (DataContext is ViewModels.DashboardViewModel vm)
+            await vm.RefreshCommand.ExecuteAsync(null);
+    }
 }

@@ -3,7 +3,7 @@
 > Each phase ends with: green tests, updated CLAUDE.md (via `docs-scribe`), and a git commit.
 > Do not start a phase without explicit approval.
 
-## Current Phase: 6 — NinjaTrader Channel
+## Current Phase: 7 — UI Completion
 
 ---
 
@@ -83,16 +83,16 @@
 
 ---
 
-## Phase 7 — UI Completion
+## Phase 7 — UI Completion ✅
 
 **Goal:** Full WPF UI for all features.
 
-- [ ] Connection page (tunnel status, webhook URL, secret management)
-- [ ] Channels page (per-channel enable/config/test-send button)
-- [ ] Rules page (visual editor, drag to reorder priority)
-- [ ] Signals page (live log, filter, replay button)
-- [ ] Settings page (DPAPI key rotation, log level, autostart, dry-run global toggle)
-- [ ] TradingView template generator page
+- [x] Connection page (tunnel status, webhook URL, secret management)
+- [x] Channels page (per-channel enable/config/test-send button)
+- [x] Rules page (visual editor, drag to reorder priority)
+- [x] Signals page (live log, filter, replay button)
+- [x] Settings page (DPAPI key rotation, log level, autostart, dry-run global toggle)
+- [x] TradingView template generator page
 
 ---
 

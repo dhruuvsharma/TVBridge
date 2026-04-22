@@ -8,4 +8,10 @@ public partial class SettingsPage : UserControl
     {
         InitializeComponent();
     }
+
+    private async void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (DataContext is ViewModels.SettingsViewModel vm)
+            await vm.LoadCommand.ExecuteAsync(null);
+    }
 }

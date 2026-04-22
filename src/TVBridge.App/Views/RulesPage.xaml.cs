@@ -8,4 +8,10 @@ public partial class RulesPage : UserControl
     {
         InitializeComponent();
     }
+
+    private async void OnLoaded(object sender, System.Windows.RoutedEventArgs e)
+    {
+        if (DataContext is ViewModels.RulesViewModel vm)
+            await vm.LoadCommand.ExecuteAsync(null);
+    }
 }

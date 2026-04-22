@@ -18,6 +18,26 @@ public sealed partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private string _tunnelStatusText = "Tunnel: Stopped";
 
+    public DashboardViewModel Dashboard { get; }
+    public SignalsViewModel Signals { get; }
+    public RulesViewModel Rules { get; }
+    public ChannelsViewModel Channels { get; }
+    public SettingsViewModel Settings { get; }
+
+    public MainViewModel(
+        DashboardViewModel dashboard,
+        SignalsViewModel signals,
+        RulesViewModel rules,
+        ChannelsViewModel channels,
+        SettingsViewModel settings)
+    {
+        Dashboard = dashboard;
+        Signals = signals;
+        Rules = rules;
+        Channels = channels;
+        Settings = settings;
+    }
+
     [RelayCommand]
     private void NavigateTo(string page)
     {

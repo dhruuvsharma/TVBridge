@@ -121,7 +121,12 @@ public partial class App : Application
                 services.AddSingleton<NinjaTraderChannel>();
                 services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<NinjaTraderChannel>());
 
-                // UI
+                // UI ViewModels
+                services.AddSingleton<ViewModels.DashboardViewModel>();
+                services.AddSingleton<ViewModels.SignalsViewModel>();
+                services.AddSingleton<ViewModels.RulesViewModel>();
+                services.AddSingleton<ViewModels.ChannelsViewModel>();
+                services.AddSingleton<ViewModels.SettingsViewModel>();
                 services.AddSingleton<ViewModels.MainViewModel>();
                 services.AddSingleton<MainWindow>();
             })
