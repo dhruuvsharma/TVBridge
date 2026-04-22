@@ -13,6 +13,7 @@ public sealed partial class DashboardViewModel : ObservableObject
     private readonly SignalRepository _signalRepo;
     private readonly CloudflaredManager _tunnelManager;
     private readonly Mt5SidecarManager _mt5Manager;
+    private readonly UpdateChecker _updateChecker;
 
     [ObservableProperty]
     private string _tunnelStatus = "Stopped";
@@ -27,18 +28,20 @@ public sealed partial class DashboardViewModel : ObservableObject
     private int _signalCount;
 
     [ObservableProperty]
-    private int _todaySignalCount;
+    private string? _updateMessage;
 
     public ObservableCollection<Signal> RecentSignals { get; } = [];
 
     public DashboardViewModel(
         SignalRepository signalRepo,
         CloudflaredManager tunnelManager,
-        Mt5SidecarManager mt5Manager)
+        Mt5SidecarManager mt5Manager,
+        UpdateChecker updateChecker)
     {
         _signalRepo = signalRepo;
         _tunnelManager = tunnelManager;
         _mt5Manager = mt5Manager;
+        _updateChecker = updateChecker;
 
         _tunnelManager.StatusChanged += (_, status) =>
         {
@@ -64,5 +67,11 @@ public sealed partial class DashboardViewModel : ObservableObject
         TunnelStatus = _tunnelManager.Status.ToString();
         TunnelUrl = _tunnelManager.TunnelUrl;
         Mt5Status = _mt5Manager.Status.ToString();
+
+        // Check for updates (non-blocking, best-effort)
+        var update = await _updateChecker.CheckAsync().ConfigureAwait(false);
+        UpdateMessage = update is not null
+            ? $"New version available: v{update.Version}"
+            : null;
     }
 }

@@ -62,7 +62,7 @@ python sidecar/mt5_bridge/main.py                  # run MT5 sidecar standalone
 
 ## Current Build Phase
 
-See `docs/BUILD_PLAN.md` — currently **Phase 1: Foundation**.
+See `docs/BUILD_PLAN.md` — **all 9 phases complete**.
 
 ## Skills
 

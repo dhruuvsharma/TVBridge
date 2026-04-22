@@ -3,7 +3,7 @@
 > Each phase ends with: green tests, updated CLAUDE.md (via `docs-scribe`), and a git commit.
 > Do not start a phase without explicit approval.
 
-## Current Phase: 8 — Packaging
+## Current Phase: COMPLETE
 
 ---
 
@@ -107,11 +107,11 @@
 
 ---
 
-## Phase 9 — Polish
+## Phase 9 — Polish ✅
 
 **Goal:** Production readiness.
 
-- [ ] Crash reporter (local file, optional upload)
-- [ ] Auto-update check (GitHub Releases API, no telemetry)
-- [ ] README with screenshots, GIFs, install guide
-- [ ] LICENSE + CONTRIBUTING + SECURITY.md
+- [x] Crash reporter (local file, optional upload)
+- [x] Auto-update check (GitHub Releases API, no telemetry)
+- [x] README with screenshots, GIFs, install guide
+- [x] LICENSE + CONTRIBUTING + SECURITY.md

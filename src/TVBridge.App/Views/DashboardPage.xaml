@@ -14,6 +14,10 @@
         <StackPanel Grid.Row="0" Margin="0,0,0,20">
             <TextBlock Text="Dashboard" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,8" />
             <TextBlock Text="System overview and recent activity" Foreground="#888888" FontSize="14" />
+            <Border Background="#FFF3CD" CornerRadius="4" Padding="10,6" Margin="0,8,0,0"
+                    Visibility="{Binding UpdateMessage, Converter={StaticResource NullToCollapsed}}">
+                <TextBlock Text="{Binding UpdateMessage}" Foreground="#856404" FontSize="12" />
+            </Border>
         </StackPanel>
 
         <!-- Status Cards -->

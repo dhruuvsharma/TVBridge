@@ -121,6 +121,9 @@ public partial class App : Application
                 services.AddSingleton<NinjaTraderChannel>();
                 services.AddSingleton<IOutputChannel>(sp => sp.GetRequiredService<NinjaTraderChannel>());
 
+                // Update checker
+                services.AddHttpClient<UpdateChecker>();
+
                 // UI ViewModels
                 services.AddSingleton<ViewModels.DashboardViewModel>();
                 services.AddSingleton<ViewModels.SignalsViewModel>();
@@ -133,6 +136,12 @@ public partial class App : Application
             .Build();
 
         await _host.StartAsync();
+
+        // Crash reporter
+        var crashReporter = new CrashReporter(
+            appDataPath,
+            _host.Services.GetRequiredService<Microsoft.Extensions.Logging.ILogger<CrashReporter>>());
+        crashReporter.Register();
 
         // Initialize database
         var db = _host.Services.GetRequiredService<DatabaseManager>();
