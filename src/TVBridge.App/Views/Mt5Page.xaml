@@ -44,6 +44,15 @@
                                    FontSize="16" FontWeight="SemiBold" />
                     </StackPanel>
 
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button Content="Start Sidecar" Style="{DynamicResource NeonButtonPrimary}"
+                                Margin="0,0,8,0" Command="{Binding StartSidecarCommand}"
+                                IsEnabled="{Binding IsSidecarStopped}" />
+                        <Button Content="Stop Sidecar" Style="{DynamicResource NeonButton}"
+                                Command="{Binding StopSidecarCommand}"
+                                IsEnabled="{Binding IsSidecarRunning}" />
+                    </StackPanel>
+
                     <CheckBox Content="Channel Enabled" IsChecked="{Binding IsEnabled}"
                               Style="{DynamicResource NeonCheckBox}" Margin="0,0,0,12" />
                     <Button Content="Toggle Enable" Style="{DynamicResource NeonButton}"
@@ -78,7 +87,7 @@
                     <Run Text=" Install MetaTrader 5 and log in to a demo or live account" />
                     <LineBreak />
                     <Run Text="2." FontWeight="Bold" Foreground="{DynamicResource NeonCyan}" />
-                    <Run Text=" The Python sidecar starts automatically when TVBridge launches" />
+                    <Run Text=" Click 'Start Sidecar' to launch the Python bridge that talks to MT5" />
                     <LineBreak />
                     <Run Text="3." FontWeight="Bold" Foreground="{DynamicResource NeonCyan}" />
                     <Run Text=" Create routing rules in the Rules tab to send signals to MT5 (Channel ID: 0)" />

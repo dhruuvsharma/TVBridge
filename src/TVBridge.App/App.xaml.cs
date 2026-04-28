@@ -187,7 +187,17 @@ public partial class App : Application
             mainWindow.Dispatcher.Invoke(() =>
                 mainViewModel.UpdateTunnelStatus(status, _tunnelManager.TunnelUrl));
         };
-        _ = _tunnelManager.StartAsync();
+        _ = Task.Run(async () =>
+        {
+            try
+            {
+                await _tunnelManager.StartAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Tunnel startup threw unobserved exception");
+            }
+        });
     }
 
     protected override async void OnExit(ExitEventArgs e)

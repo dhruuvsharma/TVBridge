@@ -39,6 +39,8 @@ public sealed partial class CloudflaredManager : IAsyncDisposable
             return;
         }
 
+        _restartCount = 0;
+
         SetStatus(TunnelStatus.Downloading);
         string exePath;
         try
@@ -49,7 +51,7 @@ public sealed partial class CloudflaredManager : IAsyncDisposable
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed to download cloudflared");
-            SetStatus(TunnelStatus.Error, ex.Message);
+            SetStatus(TunnelStatus.Error, $"Download failed: {ex.Message}");
             return;
         }
 
@@ -82,7 +84,12 @@ public sealed partial class CloudflaredManager : IAsyncDisposable
     private Task LaunchProcessAsync(string exePath, CancellationToken cancellationToken)
     {
         SetStatus(TunnelStatus.Starting);
-        _restartCount = 0;
+
+        if (!File.Exists(exePath))
+        {
+            SetStatus(TunnelStatus.Error, $"cloudflared.exe not found at {exePath}");
+            return Task.CompletedTask;
+        }
 
         var args = $"tunnel --url http://localhost:{_config.LocalPort} --no-autoupdate";
 
@@ -99,7 +106,18 @@ public sealed partial class CloudflaredManager : IAsyncDisposable
         };
 
         _process = new Process { StartInfo = psi, EnableRaisingEvents = true };
-        _process.Start();
+
+        try
+        {
+            _process.Start();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Failed to launch cloudflared process");
+            SetStatus(TunnelStatus.Error, $"Failed to launch cloudflared: {ex.Message}");
+            CleanupProcess();
+            return Task.CompletedTask;
+        }
 
         _monitorCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
@@ -121,7 +139,7 @@ public sealed partial class CloudflaredManager : IAsyncDisposable
                 if (line is null)
                     break;
 
-                _logger.LogDebug("[cloudflared] {Line}", line);
+                _logger.LogInformation("[cloudflared] {Line}", line);
                 ParseTunnelUrl(line);
             }
         }

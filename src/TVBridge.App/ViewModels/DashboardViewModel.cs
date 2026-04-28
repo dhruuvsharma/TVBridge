@@ -3,7 +3,6 @@ using System.IO;
 using System.Security.Cryptography;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using TVBridge.Channels.Mt5;
 using TVBridge.Core;
 using TVBridge.Storage.Repositories;
 using TVBridge.Tunnel;
@@ -17,7 +16,6 @@ public sealed partial class DashboardViewModel : ObservableObject
     private readonly RuleRepository _ruleRepo;
     private readonly SettingsRepository _settings;
     private readonly CloudflaredManager _tunnelManager;
-    private readonly Mt5SidecarManager _mt5Manager;
     private readonly UpdateChecker _updateChecker;
 
     // Status
@@ -28,7 +26,7 @@ public sealed partial class DashboardViewModel : ObservableObject
     private string? _tunnelUrl;
 
     [ObservableProperty]
-    private string _mt5Status = "Stopped";
+    private string? _tunnelError;
 
     [ObservableProperty]
     private int _signalCount;
@@ -68,7 +66,6 @@ public sealed partial class DashboardViewModel : ObservableObject
         RuleRepository ruleRepo,
         SettingsRepository settings,
         CloudflaredManager tunnelManager,
-        Mt5SidecarManager mt5Manager,
         UpdateChecker updateChecker)
     {
         _signalRepo = signalRepo;
@@ -76,19 +73,30 @@ public sealed partial class DashboardViewModel : ObservableObject
         _ruleRepo = ruleRepo;
         _settings = settings;
         _tunnelManager = tunnelManager;
-        _mt5Manager = mt5Manager;
         _updateChecker = updateChecker;
 
         _tunnelManager.StatusChanged += (_, status) =>
         {
             TunnelStatus = status.ToString();
             TunnelUrl = _tunnelManager.TunnelUrl;
+            TunnelError = status == Tunnel.TunnelStatus.Error ? _tunnelManager.LastError : null;
         };
+    }
 
-        _mt5Manager.StatusChanged += (_, status) =>
+    [RelayCommand]
+    private async Task RestartTunnelAsync()
+    {
+        StatusMessage = "Restarting tunnel...";
+        await _tunnelManager.StopAsync().ConfigureAwait(false);
+        try
         {
-            Mt5Status = status.ToString();
-        };
+            await _tunnelManager.StartAsync().ConfigureAwait(false);
+            StatusMessage = "Tunnel restart initiated";
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"Tunnel restart failed: {ex.Message}";
+        }
     }
 
     [RelayCommand]
@@ -97,7 +105,7 @@ public sealed partial class DashboardViewModel : ObservableObject
         // Status
         TunnelStatus = _tunnelManager.Status.ToString();
         TunnelUrl = _tunnelManager.TunnelUrl;
-        Mt5Status = _mt5Manager.Status.ToString();
+        TunnelError = _tunnelManager.Status == Tunnel.TunnelStatus.Error ? _tunnelManager.LastError : null;
 
         // Webhook settings
         WebhookSecret = await _settings.GetAsync("webhook_secret").ConfigureAwait(false) ?? "";

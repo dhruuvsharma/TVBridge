@@ -30,8 +30,7 @@
         <!-- Row 1: Status Cards + Webhook Config -->
         <Grid Grid.Row="1" Margin="0,0,0,12">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1.4*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="1.5*" />
             </Grid.ColumnDefinitions>
@@ -39,7 +38,12 @@
             <!-- Tunnel Card -->
             <Border Grid.Column="0" Style="{DynamicResource NeonCard}" Margin="0,0,6,0">
                 <StackPanel>
-                    <TextBlock Text="TUNNEL" Foreground="{DynamicResource TextMuted}" FontSize="10" FontWeight="Bold" Margin="0,0,0,4" />
+                    <DockPanel Margin="0,0,0,4">
+                        <TextBlock Text="TUNNEL" Foreground="{DynamicResource TextMuted}" FontSize="10" FontWeight="Bold" VerticalAlignment="Center" />
+                        <Button DockPanel.Dock="Right" Content="Restart" Style="{DynamicResource NeonButton}"
+                                Padding="6,2" FontSize="10" HorizontalAlignment="Right"
+                                Command="{Binding RestartTunnelCommand}" />
+                    </DockPanel>
                     <StackPanel Orientation="Horizontal">
                         <Ellipse Width="8" Height="8" Margin="0,0,6,0">
                             <Ellipse.Style>
@@ -58,34 +62,14 @@
                     </StackPanel>
                     <TextBlock Text="{Binding TunnelUrl}" Foreground="{DynamicResource NeonCyan}" FontSize="9"
                                TextTrimming="CharacterEllipsis" ToolTip="{Binding TunnelUrl}" Margin="0,4,0,0" />
-                </StackPanel>
-            </Border>
-
-            <!-- MT5 Card -->
-            <Border Grid.Column="1" Style="{DynamicResource NeonCard}" Margin="3,0,3,0">
-                <StackPanel>
-                    <TextBlock Text="MT5 SIDECAR" Foreground="{DynamicResource TextMuted}" FontSize="10" FontWeight="Bold" Margin="0,0,0,4" />
-                    <StackPanel Orientation="Horizontal">
-                        <Ellipse Width="8" Height="8" Margin="0,0,6,0">
-                            <Ellipse.Style>
-                                <Style TargetType="Ellipse">
-                                    <Setter Property="Fill" Value="{DynamicResource NeonRed}" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Mt5Status}" Value="Running">
-                                            <Setter Property="Fill" Value="{DynamicResource NeonGreen}" />
-                                            <Setter Property="Effect" Value="{DynamicResource NeonGlowGreen}" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Ellipse.Style>
-                        </Ellipse>
-                        <TextBlock Text="{Binding Mt5Status}" Foreground="{DynamicResource TextPrimary}" FontSize="14" FontWeight="SemiBold" />
-                    </StackPanel>
+                    <TextBlock Text="{Binding TunnelError}" Foreground="{DynamicResource NeonRed}" FontSize="10"
+                               TextWrapping="Wrap" ToolTip="{Binding TunnelError}" Margin="0,4,0,0"
+                               Visibility="{Binding TunnelError, Converter={StaticResource NullToCollapsed}}" />
                 </StackPanel>
             </Border>
 
             <!-- Signals Count Card -->
-            <Border Grid.Column="2" Style="{DynamicResource NeonCard}" Margin="3,0,6,0">
+            <Border Grid.Column="1" Style="{DynamicResource NeonCard}" Margin="3,0,6,0">
                 <StackPanel>
                     <TextBlock Text="SIGNALS" Foreground="{DynamicResource TextMuted}" FontSize="10" FontWeight="Bold" Margin="0,0,0,4" />
                     <TextBlock Text="{Binding SignalCount}" Foreground="{DynamicResource NeonMagenta}" FontSize="24" FontWeight="Bold" />
@@ -93,7 +77,7 @@
             </Border>
 
             <!-- Webhook Config Card -->
-            <Border Grid.Column="3" Style="{DynamicResource NeonCard}" Margin="0,0,0,0">
+            <Border Grid.Column="2" Style="{DynamicResource NeonCard}" Margin="0,0,0,0">
                 <StackPanel>
                     <TextBlock Text="WEBHOOK" Foreground="{DynamicResource TextMuted}" FontSize="10" FontWeight="Bold" Margin="0,0,0,6" />
                     <DockPanel Margin="0,0,0,6">
