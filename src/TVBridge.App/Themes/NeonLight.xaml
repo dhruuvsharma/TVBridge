@@ -1,74 +1,87 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vsRk="clr-namespace:AvalonDock.Themes.VS2013.Themes;assembly=AvalonDock.Themes.VS2013">
+
+    <!--
+        Monochrome Light theme.
+        Brush keys retain their original "Neon*" names for backward compatibility
+        with existing page XAML — only the color values are now grayscale.
+    -->
 
     <!-- Background -->
-    <SolidColorBrush x:Key="AppBackground" Color="#F0F0F8" />
-    <SolidColorBrush x:Key="SidebarBackground" Color="#1A1A2E" />
-    <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="Surface2Brush" Color="#E8E8F4" />
-    <SolidColorBrush x:Key="StatusBarBackground" Color="#E4E4F0" />
+    <SolidColorBrush x:Key="AppBackground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SidebarBackground" Color="#F2F2F2" />
+    <SolidColorBrush x:Key="SurfaceBrush" Color="#FAFAFA" />
+    <SolidColorBrush x:Key="Surface2Brush" Color="#EDEDED" />
+    <SolidColorBrush x:Key="StatusBarBackground" Color="#F2F2F2" />
 
-    <!-- Accent / Neon -->
-    <SolidColorBrush x:Key="NeonCyan" Color="#0099BB" />
-    <SolidColorBrush x:Key="NeonMagenta" Color="#BB00BB" />
-    <SolidColorBrush x:Key="NeonGreen" Color="#00AA55" />
-    <SolidColorBrush x:Key="NeonAmber" Color="#CC8800" />
-    <SolidColorBrush x:Key="NeonRed" Color="#CC2244" />
-    <SolidColorBrush x:Key="AccentBrush" Color="#0099BB" />
+    <!-- Accent (monochrome) -->
+    <SolidColorBrush x:Key="NeonCyan" Color="#000000" />
+    <SolidColorBrush x:Key="NeonMagenta" Color="#555555" />
+    <SolidColorBrush x:Key="NeonGreen" Color="#000000" />
+    <SolidColorBrush x:Key="NeonAmber" Color="#555555" />
+    <SolidColorBrush x:Key="NeonRed" Color="#000000" />
+    <SolidColorBrush x:Key="AccentBrush" Color="#000000" />
 
     <!-- Text -->
-    <SolidColorBrush x:Key="TextPrimary" Color="#1A1A2E" />
-    <SolidColorBrush x:Key="TextSecondary" Color="#6666AA" />
-    <SolidColorBrush x:Key="TextMuted" Color="#9999BB" />
+    <SolidColorBrush x:Key="TextPrimary" Color="#000000" />
+    <SolidColorBrush x:Key="TextSecondary" Color="#555555" />
+    <SolidColorBrush x:Key="TextMuted" Color="#999999" />
 
     <!-- Borders -->
-    <SolidColorBrush x:Key="BorderBrush" Color="#CCCCDD" />
-    <SolidColorBrush x:Key="BorderHover" Color="#0099BB" />
+    <SolidColorBrush x:Key="BorderBrush" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="BorderHover" Color="#000000" />
 
-    <!-- Nav (sidebar stays dark for neon effect in both themes) -->
-    <SolidColorBrush x:Key="NavHoverBackground" Color="#2A2A44" />
-    <SolidColorBrush x:Key="NavActiveBackground" Color="#222240" />
-    <SolidColorBrush x:Key="NavActiveBorder" Color="#00CCEE" />
-    <SolidColorBrush x:Key="NavText" Color="#8888AA" />
-    <SolidColorBrush x:Key="NavActiveText" Color="#00CCEE" />
+    <!-- Nav -->
+    <SolidColorBrush x:Key="NavHoverBackground" Color="#EDEDED" />
+    <SolidColorBrush x:Key="NavActiveBackground" Color="#E5E5E5" />
+    <SolidColorBrush x:Key="NavActiveBorder" Color="#000000" />
+    <SolidColorBrush x:Key="NavText" Color="#555555" />
+    <SolidColorBrush x:Key="NavActiveText" Color="#000000" />
 
     <!-- Buttons -->
-    <SolidColorBrush x:Key="ButtonBackground" Color="#E8E8F4" />
-    <SolidColorBrush x:Key="ButtonHoverBackground" Color="#D8D8EC" />
-    <SolidColorBrush x:Key="ButtonForeground" Color="#0099BB" />
-    <SolidColorBrush x:Key="ButtonPrimaryBackground" Color="#0099BB" />
+    <SolidColorBrush x:Key="ButtonBackground" Color="#EDEDED" />
+    <SolidColorBrush x:Key="ButtonHoverBackground" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="ButtonForeground" Color="#000000" />
+    <SolidColorBrush x:Key="ButtonPrimaryBackground" Color="#000000" />
     <SolidColorBrush x:Key="ButtonPrimaryForeground" Color="#FFFFFF" />
 
     <!-- Input -->
     <SolidColorBrush x:Key="InputBackground" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="InputBorder" Color="#CCCCDD" />
-    <SolidColorBrush x:Key="InputFocusBorder" Color="#0099BB" />
-    <SolidColorBrush x:Key="InputForeground" Color="#1A1A2E" />
+    <SolidColorBrush x:Key="InputBorder" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="InputFocusBorder" Color="#000000" />
+    <SolidColorBrush x:Key="InputForeground" Color="#000000" />
 
     <!-- DataGrid -->
     <SolidColorBrush x:Key="GridRowBackground" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="GridAltRowBackground" Color="#F5F5FC" />
-    <SolidColorBrush x:Key="GridHeaderBackground" Color="#E8E8F4" />
-    <SolidColorBrush x:Key="GridHeaderForeground" Color="#6666AA" />
-    <SolidColorBrush x:Key="GridSelectedBackground" Color="#D0E8F0" />
-    <SolidColorBrush x:Key="GridLineBrush" Color="#E0E0EC" />
+    <SolidColorBrush x:Key="GridAltRowBackground" Color="#F8F8F8" />
+    <SolidColorBrush x:Key="GridHeaderBackground" Color="#EDEDED" />
+    <SolidColorBrush x:Key="GridHeaderForeground" Color="#555555" />
+    <SolidColorBrush x:Key="GridSelectedBackground" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="GridLineBrush" Color="#E8E8E8" />
 
     <!-- Cards -->
     <SolidColorBrush x:Key="CardBackground" Color="#FFFFFF" />
-    <SolidColorBrush x:Key="CardBorder" Color="#DDDDEE" />
+    <SolidColorBrush x:Key="CardBorder" Color="#E0E0E0" />
 
-    <!-- Status -->
-    <SolidColorBrush x:Key="SuccessBackground" Color="#E8F8F0" />
-    <SolidColorBrush x:Key="SuccessForeground" Color="#00AA55" />
-    <SolidColorBrush x:Key="WarningBackground" Color="#FFF8E8" />
-    <SolidColorBrush x:Key="WarningForeground" Color="#CC8800" />
-    <SolidColorBrush x:Key="ErrorBackground" Color="#FFF0F4" />
-    <SolidColorBrush x:Key="ErrorForeground" Color="#CC2244" />
+    <!-- Menu / Popup -->
+    <SolidColorBrush x:Key="MenuBackground" Color="#F2F2F2" />
+    <SolidColorBrush x:Key="MenuItemHoverBackground" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="SubmenuBackground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SubmenuBorder" Color="#DCDCDC" />
 
-    <!-- Glow Effects (subtler in light mode) -->
-    <DropShadowEffect x:Key="NeonGlow" Color="#0099BB" BlurRadius="8" ShadowDepth="0" Opacity="0.3" />
-    <DropShadowEffect x:Key="NeonGlowMagenta" Color="#BB00BB" BlurRadius="8" ShadowDepth="0" Opacity="0.3" />
-    <DropShadowEffect x:Key="NeonGlowGreen" Color="#00AA55" BlurRadius="8" ShadowDepth="0" Opacity="0.3" />
+    <!-- Status (monochrome) -->
+    <SolidColorBrush x:Key="SuccessBackground" Color="#F0F0F0" />
+    <SolidColorBrush x:Key="SuccessForeground" Color="#000000" />
+    <SolidColorBrush x:Key="WarningBackground" Color="#F0F0F0" />
+    <SolidColorBrush x:Key="WarningForeground" Color="#555555" />
+    <SolidColorBrush x:Key="ErrorBackground" Color="#E5E5E5" />
+    <SolidColorBrush x:Key="ErrorForeground" Color="#000000" />
+
+    <!-- Glow effects neutralised -->
+    <DropShadowEffect x:Key="NeonGlow" Color="#000000" BlurRadius="0" ShadowDepth="0" Opacity="0" />
+    <DropShadowEffect x:Key="NeonGlowMagenta" Color="#000000" BlurRadius="0" ShadowDepth="0" Opacity="0" />
+    <DropShadowEffect x:Key="NeonGlowGreen" Color="#000000" BlurRadius="0" ShadowDepth="0" Opacity="0" />
     <DropShadowEffect x:Key="CardShadow" Color="#000000" BlurRadius="12" ShadowDepth="1" Opacity="0.08" />
 
     <!-- Corner Radius -->
@@ -101,7 +114,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource NavHoverBackground}" />
-                            <Setter Property="Foreground" Value="#E0E0FF" />
+                            <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -270,7 +283,7 @@
     </Style>
 
     <Style x:Key="SectionTitle" TargetType="TextBlock">
-        <Setter Property="Foreground" Value="{StaticResource NeonCyan}" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
         <Setter Property="FontSize" Value="15" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
@@ -280,5 +293,234 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Margin" Value="0,0,0,4" />
     </Style>
+
+    <!-- ===== MENU / CONTEXT MENU (implicit, theme-wide) ===== -->
+
+    <!-- Top-level Menu bar -->
+    <Style TargetType="Menu">
+        <Setter Property="Background" Value="{StaticResource MenuBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+
+    <!-- Separator inside menu popups -->
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="Separator">
+        <Setter Property="Margin" Value="0,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Separator">
+                    <Rectangle Height="1" Fill="{StaticResource BorderBrush}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- MenuItem: top-level header (e.g. "View" in the menu bar) -->
+    <ControlTemplate x:Key="TopLevelMenuItemTemplate" TargetType="MenuItem">
+        <Border x:Name="Bd"
+                Background="{TemplateBinding Background}"
+                BorderThickness="0"
+                Padding="{TemplateBinding Padding}">
+            <Grid>
+                <ContentPresenter ContentSource="Header"
+                                  RecognizesAccessKey="True"
+                                  VerticalAlignment="Center" />
+                <Popup x:Name="PART_Popup"
+                       Placement="Bottom"
+                       IsOpen="{TemplateBinding IsSubmenuOpen}"
+                       AllowsTransparency="True"
+                       Focusable="False"
+                       PopupAnimation="None">
+                    <Border Background="{StaticResource SubmenuBackground}"
+                            BorderBrush="{StaticResource SubmenuBorder}"
+                            BorderThickness="1"
+                            Padding="2"
+                            MinWidth="160">
+                        <StackPanel IsItemsHost="True"
+                                    KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuItemHoverBackground}" />
+            </Trigger>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuItemHoverBackground}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource TextMuted}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- MenuItem: submenu item (rows inside the dropdown) -->
+    <ControlTemplate x:Key="SubmenuMenuItemTemplate" TargetType="MenuItem">
+        <Border x:Name="Bd"
+                Background="{TemplateBinding Background}"
+                BorderThickness="0"
+                Padding="0">
+            <Grid MinHeight="26">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="22" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="14" />
+                </Grid.ColumnDefinitions>
+                <Path x:Name="Check" Grid.Column="0"
+                      Visibility="Collapsed"
+                      Width="10" Height="10"
+                      Stretch="Uniform"
+                      Stroke="{StaticResource TextPrimary}"
+                      StrokeThickness="1.6"
+                      Data="M 0,5 L 4,9 L 10,0"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center" />
+                <ContentPresenter Grid.Column="1"
+                                  ContentSource="Header"
+                                  RecognizesAccessKey="True"
+                                  VerticalAlignment="Center"
+                                  Margin="4,0,12,0" />
+                <TextBlock Grid.Column="2"
+                           Text="{TemplateBinding InputGestureText}"
+                           Foreground="{StaticResource TextSecondary}"
+                           VerticalAlignment="Center" />
+                <Path x:Name="Arrow" Grid.Column="3"
+                      Visibility="Collapsed"
+                      Width="6" Height="8"
+                      Fill="{StaticResource TextSecondary}"
+                      Data="M 0,0 L 4,4 L 0,8 Z"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center" />
+                <Popup x:Name="PART_Popup"
+                       Placement="Right"
+                       HorizontalOffset="-2"
+                       IsOpen="{TemplateBinding IsSubmenuOpen}"
+                       AllowsTransparency="True"
+                       Focusable="False"
+                       PopupAnimation="None">
+                    <Border Background="{StaticResource SubmenuBackground}"
+                            BorderBrush="{StaticResource SubmenuBorder}"
+                            BorderThickness="1"
+                            Padding="2"
+                            MinWidth="160">
+                        <StackPanel IsItemsHost="True"
+                                    KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="{StaticResource MenuItemHoverBackground}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="Check" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="Role" Value="SubmenuHeader">
+                <Setter TargetName="Arrow" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{StaticResource TextMuted}" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="MenuItem">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Padding" Value="10,4" />
+        <Style.Triggers>
+            <Trigger Property="Role" Value="TopLevelHeader">
+                <Setter Property="Padding" Value="12,6" />
+                <Setter Property="Template" Value="{StaticResource TopLevelMenuItemTemplate}" />
+            </Trigger>
+            <Trigger Property="Role" Value="TopLevelItem">
+                <Setter Property="Padding" Value="12,6" />
+                <Setter Property="Template" Value="{StaticResource TopLevelMenuItemTemplate}" />
+            </Trigger>
+            <Trigger Property="Role" Value="SubmenuHeader">
+                <Setter Property="Template" Value="{StaticResource SubmenuMenuItemTemplate}" />
+            </Trigger>
+            <Trigger Property="Role" Value="SubmenuItem">
+                <Setter Property="Template" Value="{StaticResource SubmenuMenuItemTemplate}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ContextMenu (used by AvalonDock tab right-click) -->
+    <Style TargetType="ContextMenu">
+        <Setter Property="Background" Value="{StaticResource SubmenuBackground}" />
+        <Setter Property="Foreground" Value="{StaticResource TextPrimary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource SubmenuBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="HasDropShadow" Value="False" />
+    </Style>
+
+    <!-- ===== AvalonDock VS2013 theme overrides (monochrome light) ===== -->
+    <Color x:Key="{x:Static vsRk:ResourceKeys.ControlAccentColorKey}">#FF000000</Color>
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ControlAccentBrushKey}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.Background}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.PanelBorderBrush}" Color="Transparent" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.TabBackground}" Color="#FFFFFF" />
+
+    <!-- Tool window caption -->
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionActiveBackground}" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionActiveText}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionActiveGrip}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionInactiveBackground}" Color="#EDEDED" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionInactiveText}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionInactiveGrip}" Color="#999999" />
+
+    <!-- Caption buttons -->
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActiveGlyph}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActiveHoveredBackground}" Color="#C8C8C8" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActiveHoveredBorder}" Color="Transparent" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActiveHoveredGlyph}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActivePressedBackground}" Color="#B5B5B5" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActivePressedBorder}" Color="Transparent" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonActivePressedGlyph}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactiveGlyph}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactiveHoveredBackground}" Color="#C8C8C8" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactiveHoveredBorder}" Color="Transparent" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactiveHoveredGlyph}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactivePressedBackground}" Color="#B5B5B5" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactivePressedBorder}" Color="Transparent" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowCaptionButtonInactivePressedGlyph}" Color="#000000" />
+
+    <!-- Tool window tabs -->
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabSelectedActiveBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabSelectedActiveText}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabSelectedInactiveBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabSelectedInactiveText}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabUnselectedBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabUnselectedText}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabUnselectedHoveredBackground}" Color="#EDEDED" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.ToolWindowTabUnselectedHoveredText}" Color="#000000" />
+
+    <!-- Document well tabs -->
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabSelectedActiveBackground}" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabSelectedActiveText}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabSelectedInactiveBackground}" Color="#EDEDED" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabSelectedInactiveText}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabUnselectedBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabUnselectedText}" Color="#555555" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabUnselectedHoveredBackground}" Color="#EDEDED" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.DocumentWellTabUnselectedHoveredText}" Color="#000000" />
+
+    <!-- Floating windows -->
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.FloatingDocumentWindowBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.FloatingDocumentWindowBorder}" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.FloatingToolWindowBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.FloatingToolWindowBorder}" Color="#DCDCDC" />
+
+    <!-- Navigator -->
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.NavigatorWindowBackground}" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.NavigatorWindowForeground}" Color="#000000" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.NavigatorWindowSelectedBackground}" Color="#DCDCDC" />
+    <SolidColorBrush x:Key="{x:Static vsRk:ResourceKeys.NavigatorWindowSelectedText}" Color="#000000" />
 
 </ResourceDictionary>

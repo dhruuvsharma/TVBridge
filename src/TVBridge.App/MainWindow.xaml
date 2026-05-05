@@ -3,156 +3,45 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:TVBridge.App.Views"
         xmlns:converters="clr-namespace:TVBridge.App.Converters"
-        Title="TVBridge" Height="700" Width="1100"
+        xmlns:avalonDock="https://github.com/Dirkster99/AvalonDock"
+        xmlns:avalonDockThemes="clr-namespace:AvalonDock.Themes;assembly=AvalonDock.Themes.VS2013"
+        Title="TVBridge" Height="800" Width="1300"
         WindowStartupLocation="CenterScreen"
+        Loaded="OnWindowLoaded"
         Icon="Icon/DaxAlgoLogo.ico">
     <Window.Resources>
         <converters:NullToCollapsedConverter x:Key="NullToCollapsed" />
     </Window.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="210" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <DockPanel LastChildFill="True">
 
-        <!-- Sidebar -->
-        <Border Grid.Column="0" Grid.RowSpan="2" Background="{DynamicResource SidebarBackground}">
-            <DockPanel>
-                <!-- Logo + Title -->
-                <StackPanel DockPanel.Dock="Top" Margin="16,16,16,20">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Icon/DaxAlgoLogo.png" Width="32" Height="32" Margin="0,0,10,0"
-                               RenderOptions.BitmapScalingMode="HighQuality" />
-                        <TextBlock Text="TVBridge" Foreground="{DynamicResource NeonCyan}"
-                                   FontSize="20" FontWeight="Bold" VerticalAlignment="Center"
-                                   Effect="{DynamicResource NeonGlow}" />
-                    </StackPanel>
-                    <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,12,0,0" />
-                </StackPanel>
-
-                <!-- Theme toggle at bottom -->
-                <Button DockPanel.Dock="Bottom" Style="{DynamicResource NavButton}" Margin="0,0,0,8"
-                        Command="{Binding ToggleThemeCommand}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Theme:" Margin="0,0,6,0" />
-                        <TextBlock Foreground="{DynamicResource NeonCyan}">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Text" Value="Dark" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsDarkTheme}" Value="False">
-                                            <Setter Property="Text" Value="Light" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </StackPanel>
-                </Button>
-
-                <Border DockPanel.Dock="Bottom" Height="1" Background="{DynamicResource BorderBrush}" Margin="16,4,16,4" />
-
-                <!-- Nav Buttons -->
-                <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <!-- Overview -->
-                        <TextBlock Text="OVERVIEW" Foreground="{DynamicResource TextMuted}" FontSize="10"
-                                   FontWeight="Bold" Margin="16,8,0,4" />
-                        <Button Content="Dashboard" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="Dashboard" />
-
-                        <!-- Channels -->
-                        <TextBlock Text="CHANNELS" Foreground="{DynamicResource TextMuted}" FontSize="10"
-                                   FontWeight="Bold" Margin="16,16,0,4" />
-                        <Button Content="MetaTrader 5" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="MT5" />
-                        <Button Content="Telegram" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="Telegram" />
-                        <Button Content="Discord" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="Discord" />
-                        <Button Content="NinjaTrader" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="NinjaTrader" />
-
-                        <!-- Configuration -->
-                        <TextBlock Text="CONFIG" Foreground="{DynamicResource TextMuted}" FontSize="10"
-                                   FontWeight="Bold" Margin="16,16,0,4" />
-                        <Button Content="Rules" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="Rules" />
-                        <Button Content="Settings" Style="{DynamicResource NavButton}"
-                                Command="{Binding NavigateToCommand}" CommandParameter="Settings" />
-                    </StackPanel>
-                </ScrollViewer>
-            </DockPanel>
-        </Border>
-
-        <!-- Content Area -->
-        <Border Grid.Column="1" Grid.Row="0" Background="{DynamicResource AppBackground}">
-            <ContentControl>
-                <ContentControl.Style>
-                    <Style TargetType="ContentControl">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="Dashboard">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:DashboardPage DataContext="{Binding Dashboard}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="MT5">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:Mt5Page DataContext="{Binding Mt5}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="Telegram">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:TelegramPage DataContext="{Binding Telegram}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="Discord">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:DiscordPage DataContext="{Binding Discord}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="NinjaTrader">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:NinjaTraderPage DataContext="{Binding NinjaTrader}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="Rules">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:RulesPage DataContext="{Binding Rules}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding SelectedPage}" Value="Settings">
-                                <Setter Property="Content">
-                                    <Setter.Value>
-                                        <views:SettingsPage DataContext="{Binding Settings}" />
-                                    </Setter.Value>
-                                </Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ContentControl.Style>
-            </ContentControl>
-        </Border>
+        <!-- Top Menu -->
+        <Menu DockPanel.Dock="Top" Padding="6,2">
+            <MenuItem Header="_View">
+                <MenuItem Header="Dashboard" IsCheckable="True"
+                          IsChecked="{Binding ElementName=DashboardAnchor, Path=IsVisible, Mode=TwoWay}" />
+                <Separator />
+                <MenuItem Header="MetaTrader 5" IsCheckable="True"
+                          IsChecked="{Binding ElementName=Mt5Anchor, Path=IsVisible, Mode=TwoWay}" />
+                <MenuItem Header="Telegram" IsCheckable="True"
+                          IsChecked="{Binding ElementName=TelegramAnchor, Path=IsVisible, Mode=TwoWay}" />
+                <MenuItem Header="Discord" IsCheckable="True"
+                          IsChecked="{Binding ElementName=DiscordAnchor, Path=IsVisible, Mode=TwoWay}" />
+                <MenuItem Header="NinjaTrader" IsCheckable="True"
+                          IsChecked="{Binding ElementName=NtAnchor, Path=IsVisible, Mode=TwoWay}" />
+                <Separator />
+                <MenuItem Header="Rules" IsCheckable="True"
+                          IsChecked="{Binding ElementName=RulesAnchor, Path=IsVisible, Mode=TwoWay}" />
+                <MenuItem Header="Settings" IsCheckable="True"
+                          IsChecked="{Binding ElementName=SettingsAnchor, Path=IsVisible, Mode=TwoWay}" />
+            </MenuItem>
+            <MenuItem Header="_Options">
+                <MenuItem Header="Toggle Theme" Command="{Binding ToggleThemeCommand}" />
+            </MenuItem>
+        </Menu>
 
         <!-- Status Bar -->
-        <Border Grid.Column="1" Grid.Row="1" Background="{DynamicResource StatusBarBackground}" Padding="12,6">
+        <Border DockPanel.Dock="Bottom" Background="{DynamicResource StatusBarBackground}" Padding="12,6">
             <DockPanel>
                 <TextBlock DockPanel.Dock="Right" Margin="12,0,0,0" FontSize="11"
                            Foreground="{DynamicResource NeonCyan}"
@@ -163,5 +52,73 @@
                            Foreground="{DynamicResource TextSecondary}" />
             </DockPanel>
         </Border>
-    </Grid>
+
+        <!-- Docking Area -->
+        <avalonDock:DockingManager x:Name="DockManager"
+                                   Background="{DynamicResource AppBackground}"
+                                   Foreground="{DynamicResource TextPrimary}"
+                                   BorderBrush="Transparent"
+                                   BorderThickness="0"
+                                   Padding="0"
+                                   Margin="0">
+            <avalonDock:DockingManager.Theme>
+                <avalonDockThemes:Vs2013DarkTheme />
+            </avalonDock:DockingManager.Theme>
+            <avalonDock:LayoutRoot>
+                <avalonDock:LayoutPanel Orientation="Horizontal">
+                    <avalonDock:LayoutAnchorablePane>
+                        <avalonDock:LayoutAnchorable x:Name="DashboardAnchor"
+                                                     ContentId="dashboard"
+                                                     Title="Dashboard"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:DashboardPage DataContext="{Binding Dashboard}" />
+                        </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="Mt5Anchor"
+                                                     ContentId="mt5"
+                                                     Title="MetaTrader 5"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:Mt5Page DataContext="{Binding Mt5}" />
+                        </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="TelegramAnchor"
+                                                     ContentId="telegram"
+                                                     Title="Telegram"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:TelegramPage DataContext="{Binding Telegram}" />
+                        </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="DiscordAnchor"
+                                                     ContentId="discord"
+                                                     Title="Discord"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:DiscordPage DataContext="{Binding Discord}" />
+                        </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="NtAnchor"
+                                                     ContentId="ninjatrader"
+                                                     Title="NinjaTrader"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:NinjaTraderPage DataContext="{Binding NinjaTrader}" />
+                        </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="RulesAnchor"
+                                                     ContentId="rules"
+                                                     Title="Rules"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:RulesPage DataContext="{Binding Rules}" />
+                        </avalonDock:LayoutAnchorable>
+                        <avalonDock:LayoutAnchorable x:Name="SettingsAnchor"
+                                                     ContentId="settings"
+                                                     Title="Settings"
+                                                     CanClose="False"
+                                                     CanHide="True">
+                            <views:SettingsPage DataContext="{Binding Settings}" />
+                        </avalonDock:LayoutAnchorable>
+                    </avalonDock:LayoutAnchorablePane>
+                </avalonDock:LayoutPanel>
+            </avalonDock:LayoutRoot>
+        </avalonDock:DockingManager>
+    </DockPanel>
 </Window>

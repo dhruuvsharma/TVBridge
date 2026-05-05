@@ -11,6 +11,16 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
+    private void OnWindowLoaded(object sender, RoutedEventArgs e)
+    {
+        Mt5Anchor.Hide();
+        TelegramAnchor.Hide();
+        DiscordAnchor.Hide();
+        NtAnchor.Hide();
+        RulesAnchor.Hide();
+        SettingsAnchor.Hide();
+    }
+
     private void CopyTunnelUrl_Click(object sender, MouseButtonEventArgs e)
     {
         if (DataContext is MainViewModel vm && vm.TunnelUrl is not null)

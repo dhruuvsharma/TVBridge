@@ -8,9 +8,6 @@ namespace TVBridge.App.ViewModels;
 public sealed partial class MainViewModel : ObservableObject
 {
     [ObservableProperty]
-    private string _selectedPage = "Dashboard";
-
-    [ObservableProperty]
     private string _statusText = "Ready";
 
     [ObservableProperty]
@@ -49,12 +46,6 @@ public sealed partial class MainViewModel : ObservableObject
         Rules = rules;
         Settings = settings;
         ThemeService = themeService;
-    }
-
-    [RelayCommand]
-    private void NavigateTo(string page)
-    {
-        SelectedPage = page;
     }
 
     [RelayCommand]

@@ -8,7 +8,9 @@
       "Bash(dotnet build *)",
       "Bash(dotnet test *)",
       "Bash(gh auth:*)",
-      "Bash(gh repo:*)"
+      "Bash(gh repo:*)",
+      "Bash(dotnet *)",
+      "Bash(curl -sL https://raw.githubusercontent.com/Dirkster99/AvalonDock/master/source/Components/AvalonDock.Themes.VS2013/Themes/ResourceKeys.cs)"
     ]
   }
 }
